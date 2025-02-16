@@ -103,21 +103,21 @@ for nodeName in nodeList:
 
     
     
+   
+    host.addService(pg.Execute(shell="bash", command="sudo /local/repository/post-boot.sh " + params.workflow + " " + params.toolVersion + " >> /local/logs/output_log.txt"))
+    # Since we want to create network links to the FPGA, it has its own identity.
+    fpga = request.RawPC("fpga-" + nodeName)
+    # UMass cluster
+    fpga.component_manager_id = "urn:publicid:IDN+cloudlab.umass.edu+authority+cm"
+    # Assign to the fgpa node
+    fpga.component_id = "fpga-" + nodeName
+    # Use the default image for the type of the node selected. 
+    fpga.setUseTypeDefaultImage()
+
+    # Secret sauce.
+    fpga.SubNodeOf(host)
+    
     if n_idx == 0:
-        host.addService(pg.Execute(shell="bash", command="sudo /local/repository/post-boot.sh " + params.workflow + " " + params.toolVersion + " >> /local/logs/output_log.txt"))
-        # Since we want to create network links to the FPGA, it has its own identity.
-        fpga = request.RawPC("fpga-" + nodeName)
-        # UMass cluster
-        fpga.component_manager_id = "urn:publicid:IDN+cloudlab.umass.edu+authority+cm"
-        # Assign to the fgpa node
-        fpga.component_id = "fpga-" + nodeName
-        # Use the default image for the type of the node selected. 
-        fpga.setUseTypeDefaultImage()
-    
-        # Secret sauce.
-        fpga.SubNodeOf(host)
-    
-        
         host_iface1 = host.addInterface()
         host_iface1.component_id = "eth2"
         host_iface1.addAddress(pg.IPv4Address("192.168.40." + str(n_idx+30), "255.255.255.0")) 
@@ -130,15 +130,21 @@ for nodeName in nodeList:
         fpga_iface2.addAddress(pg.IPv4Address("192.168.50." + str(n_idx+20), "255.255.255.0"))
         lan2.addInterface(fpga_iface1)
         lan2.addInterface(fpga_iface2)
-    else:
+   else:
         host_iface1 = host.addInterface()
         host_iface1.component_id = "eth2"
         host_iface1.addAddress(pg.IPv4Address("192.168.50." + str(n_idx+30), "255.255.255.0")) 
         lan2.addInterface(host_iface1)
+
+  lan1.link_multiplexing = True;
+  lan1.best_effort = True;
+
+  lan2.link_multiplexing = True;
+  lan2.best_effort = True;
       
   
   
-n_idx = n_idx + 1
+  n_idx = n_idx + 1
 
 # Print Request RSpec
 pc.printRequestRSpec(request)

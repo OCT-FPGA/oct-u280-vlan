@@ -82,6 +82,12 @@ lan2 = request.Link("link2", "vlan")
 lan1.setVlanTag(2711)
 lan2.setVlanTag(2712)
 
+lan1.link_multiplexing = True
+lan1.best_effort = True
+
+lan2.link_multiplexing = True
+lan2.best_effort = True
+
 nodeList = params.nodes.split(',')
 n_idx = 0
 for nodeName in nodeList:
@@ -114,7 +120,11 @@ for nodeName in nodeList:
     # Secret sauce.
     fpga.SubNodeOf(host)
 
-    
+    # lan1.link_multiplexing = True
+    # lan1.best_effort = True
+
+    # lan2.link_multiplexing = True
+    # lan2.best_effort = True
     
     if n_idx == 0:
         host_iface1 = host.addInterface()
@@ -136,11 +146,11 @@ for nodeName in nodeList:
         lan1.addInterface(host_iface1)
         lan2.addInterface(host_iface1)
     
-    lan1.link_multiplexing = True
-    lan1.best_effort = True
+    # lan1.link_multiplexing = True
+    # lan1.best_effort = True
 
-    lan2.link_multiplexing = True
-    lan2.best_effort = True
+    # lan2.link_multiplexing = True
+    # lan2.best_effort = True
       
   
   

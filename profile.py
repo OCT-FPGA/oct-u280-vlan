@@ -141,10 +141,13 @@ for nodeName in nodeList:
         lan2.addInterface(fpga_iface2)
     else:
         host_iface1 = host.addInterface()
-        host_iface1.component_id = "eth2"
+        host_iface2 = host.addInterface()
+        host_iface1.component_id = "eth1"
+        host_iface2.component_id = "eth2"
         host_iface1.addAddress(pg.IPv4Address("192.168.50." + str(n_idx+30), "255.255.255.0"))
-        lan1.addInterface(host_iface1)
+        host_iface2.addAddress(pg.IPv4Address("192.168.40." + str(n_idx+30), "255.255.255.0"))
         lan2.addInterface(host_iface1)
+        lan1.addInterface(host_iface2)
     
     # lan1.link_multiplexing = True
     # lan1.best_effort = True

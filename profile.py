@@ -128,7 +128,7 @@ for nodeName in nodeList:
     
     if n_idx == 0:
         host_iface1 = host.addInterface()
-        host_iface1.component_id = "eth2"
+        host_iface1.component_id = "eth3"
         host_iface1.addAddress(pg.IPv4Address("192.168.40." + str(n_idx+30), "255.255.255.0")) 
         lan1.addInterface(host_iface1)
         fpga_iface1 = fpga.addInterface()

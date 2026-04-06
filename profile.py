@@ -79,8 +79,8 @@ pc.verifyParameters()
 lan1 = request.Link("link1", "vlan")
 lan2 = request.Link("link2", "vlan")
 
-lan1.setVlanTag(3911)
-lan2.setVlanTag(3912)
+lan1.setVlanTag(1911)
+lan2.setVlanTag(1912)
 
 lan1.link_multiplexing = True
 lan1.best_effort = True

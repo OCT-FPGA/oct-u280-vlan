@@ -142,8 +142,8 @@ for nodeName in nodeList:
         # host_iface2.component_id = "eth3"
         lan2.addInterface(host_iface1)
         lan1.addInterface(host_iface1)
-        host_iface1.addAddress(pg.IPv4Address("192.168.50." + str(n_idx+30), "255.255.255.0"))
-        host_iface1.addAddress(pg.IPv4Address("192.168.40." + str(n_idx+30), "255.255.255.0"))
+        # host_iface1.addAddress(pg.IPv4Address("192.168.50." + str(n_idx+30), "255.255.255.0"))
+        # host_iface1.addAddress(pg.IPv4Address("192.168.40." + str(n_idx+30), "255.255.255.0"))
   
     n_idx = n_idx + 1
 
